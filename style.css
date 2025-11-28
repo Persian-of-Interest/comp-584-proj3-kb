@@ -1,0 +1,195 @@
+/* Border box declaration 
+https://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+html {
+  box-sizing: border-box;
+}
+/* inherit border-box on all elements in the universe and before and after
+ */
+*, 
+*:before, 
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+	font-family: Arial, Geneva, sans-serif;
+}
+a {
+	color: #2772B0;
+}
+.wrapper {
+	width: 97%;
+	max-width: 1200px;
+	margin: 0 auto;
+	float: none;
+	background-color: #fff;
+}
+
+div img {
+	width: 100%;
+	max-width: 225px; 
+}
+
+/* grid system -- mobile first! */
+/* flex contatiner */
+
+.row {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+/* attribute selector to give some margin between columns and apply styles to flex items */
+
+[class*="col-"] {
+	margin-left: 4%;
+	flex: 0 0 92%;
+}
+
+/* Add background colors to see how much space each column is taking */
+
+.col-1 {
+	background-color: #A3CDD9;
+}
+
+.col-2 {
+	background-color: #FFFCE6;
+}
+
+.col-3 {
+	background-color: #F2CC39;
+}
+  
+.col-4 {
+	background-color: #C2B8AD;
+}
+  
+/* Row 6 unique layout */
+.col-mini {
+	background-color: #E6F2E6;
+	text-align: center;
+	padding: 10px;
+	justify-content: space-between;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: calc((100%) / 3);
+	min-width: 60px;   
+	max-width: 182px;
+	box-sizing: border-box;
+	flex-wrap: wrap;           
+}
+  
+  /* Round Images */
+  .col-mini img {
+	width: 100%;
+	aspect-ratio: 1 / 1;   /* Forces a circlur image even if the image is rectangular, so no more ovals */
+	object-fit: cover;
+	border-radius: 50%;
+  } 
+
+/* Tablet Landscape Screen Sizes */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+  .col-1,
+  .col-2 {
+		flex: 0 0 44%;
+	}
+  
+	.col-3 {
+		flex: 0 0 92%;
+	}
+	
+	.col-4 {
+		flex: 0 0 92%;
+	}
+
+	/* Adjust order for row 5 */
+	.row:nth-of-type(5) .col-1.order-2 {
+		order: 3;
+	}  
+	
+	/* Row 1: 2 per row only */
+	.row:nth-of-type(1) .col-1 {
+		flex: 0 0 44%;
+	}
+	
+	/* Row 3: each gets own row */
+	.row:nth-of-type(3) .col-1,
+	.row:nth-of-type(3) .col-3 {
+		flex: 0 0 92%;
+	}
+	
+	/* Row 5: tablet layout - large column above, narrow columns below side by side */
+	.row:nth-of-type(5) {
+		flex-wrap: wrap;
+	}
+	
+	.row:nth-of-type(5) .col-2 {
+		order: 1;          /* large middle column on top */
+		flex: 0 0 92%;     /* full width */
+	}
+	
+	.row:nth-of-type(5) .col-1.order-1,
+	.row:nth-of-type(5) .col-1.order-2 {
+		order: 2;          /* narrow columns come after */
+		flex: 0 0 44%;     /* two per row below */
+	}
+
+}
+/* Desktop screen Sizes */
+@media only screen and (min-width: 768px) {
+  
+  
+ 	.col-1 {
+		flex: 0 0 20%;
+	}
+  
+  
+  
+	.col-2 {
+		flex: 0 0 44%;
+	}
+
+	.col-3 {
+		flex: 0 0 68%;
+	}
+	
+	.col-4 {
+		flex: 0 0 92%;
+	}
+	
+	/* Adjust order for row 5 desktop */
+	.row:nth-of-type(5) .col-1.order-2 {
+		order: 2;
+	}
+
+	/* Reset Row 1 for desktop: whatever the desktop layout should be */
+	.row:nth-of-type(1) .col-1 {
+		flex: 0 0 20%; 
+	}
+
+	/* Reset Row 3 for desktop */
+	.row:nth-of-type(3) .col-1 {
+		flex: 0 0 20%;   /* 1-column-wide item */
+	}
+	
+	.row:nth-of-type(3) .col-3 {
+		flex: 0 0 68%;   /* 3-column-wide item */
+	}
+
+	/* Reset Row 5 for desktop to original layout */
+	.row:nth-of-type(5) {
+		flex-wrap: nowrap;
+	}
+
+	.row:nth-of-type(5) .col-2 {
+		order: initial;
+		flex: 0 0 44%;
+	}
+
+	.row:nth-of-type(5) .col-1.order-1,
+	.row:nth-of-type(5) .col-1.order-2 {
+		order: initial;
+		flex: 0 0 20%;
+	}
+
+}
